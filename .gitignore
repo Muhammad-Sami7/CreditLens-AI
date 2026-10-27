@@ -48,3 +48,11 @@ desktop.ini
 # models/*.pkl
 
 structure.txt
+
+models/brier_scores.csv
+models/calibrated_threshold_results.csv
+models/calibration_curve.csv
+models/calibration_results.json
+models/ensemble_feature_importance.csv
+models/model_comparison.csv
+models/threshold_results.csv
