@@ -232,4 +232,4 @@ See [LICENSE](LICENSE).
 
 ## Author
 
-Muhammad Sami
+**Muhammad Sami** · [LinkedIn](www.linkedin.com/in/muhammad-sami-4b5008298/) · [GitHub](https://github.com/Muhammad-Sami7)
