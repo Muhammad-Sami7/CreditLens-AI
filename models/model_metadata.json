@@ -1,0 +1,56 @@
+{
+    "project": {
+        "name": "CreditLens-AI",
+        "version": "1.0.0",
+        "description": "Production-ready AI Financial Risk Intelligence Platform",
+        "author": "Muhammad Sami",
+        "created_on": "2026-08-04 09:16:02"
+    },
+    "dataset": {
+        "train_rows": 246008,
+        "validation_rows": 61503,
+        "total_features": 297,
+        "target_column": "TARGET",
+        "feature_file": "feature_columns.json"
+    },
+    "individual_models": {
+        "Regularized LightGBM": {
+            "model_file": "regularized_lightgbm.pkl",
+            "roc_auc": 0.7895,
+            "threshold": 0.66
+        },
+        "Optimized XGBoost": {
+            "model_file": "optimized_xgboost.pkl",
+            "roc_auc": 0.7901,
+            "threshold": 0.69
+        },
+        "Optimized CatBoost": {
+            "model_file": "optimized_catboost.pkl",
+            "roc_auc": 0.7891,
+            "threshold": 0.67
+        }
+    },
+    "ensemble": {
+        "type": "Weighted Soft Voting",
+        "weights": {
+            "LightGBM": 0.35,
+            "XGBoost": 0.35,
+            "CatBoost": 0.3
+        },
+        "threshold": 0.6899999999999997,
+        "validation_metrics": {
+            "roc_auc": 0.7911939414452229,
+            "accuracy": 0.8792416630083085,
+            "precision": 0.30559065066329755,
+            "recall": 0.38972809667673713,
+            "f1_score": 0.34256882358148183
+        }
+    },
+    "deployment": {
+        "framework": "FastAPI",
+        "frontend": "Streamlit",
+        "database": "PostgreSQL",
+        "explainability": "SHAP",
+        "llm_engine": "Customer Recommendation Engine"
+    }
+}

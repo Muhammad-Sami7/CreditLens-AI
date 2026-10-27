@@ -1,0 +1,112 @@
+{
+    "evaluation_type": "development_validation",
+    "warning": "The validation set was used during model development. The existing isotonic calibrator and calibrated threshold were also fitted/optimized using this validation set, so calibrated metrics are not an independent final test.",
+    "dataset": {
+        "total_rows": 307511,
+        "training_rows": 246008,
+        "validation_rows": 61503,
+        "feature_count": 297,
+        "positive_cases": 4965,
+        "negative_cases": 56538,
+        "positive_rate": 0.08072776937710356
+    },
+    "ensemble_configuration": {
+        "lightgbm_weight": 0.35,
+        "xgboost_weight": 0.35,
+        "catboost_weight": 0.3,
+        "raw_threshold": 0.69,
+        "calibrated_threshold": 0.18
+    },
+    "individual_models": {
+        "lightgbm": {
+            "threshold": 0.66,
+            "roc_auc": 0.789469086677242,
+            "pr_auc": 0.2882953331485672,
+            "accuracy": 0.8664943173503732,
+            "precision": 0.28342674139311447,
+            "recall": 0.42779456193353477,
+            "f1_score": 0.34095834336624126,
+            "brier_score": 0.1626581117428718,
+            "confusion_matrix": {
+                "true_negative": 51168,
+                "false_positive": 5370,
+                "false_negative": 2841,
+                "true_positive": 2124
+            },
+            "positive_predictions": 7494,
+            "negative_predictions": 54009
+        },
+        "xgboost": {
+            "threshold": 0.69,
+            "roc_auc": 0.7900992842571957,
+            "pr_auc": 0.28830359624651464,
+            "accuracy": 0.8732256963074972,
+            "precision": 0.29352580927384075,
+            "recall": 0.4054380664652568,
+            "f1_score": 0.3405227099720883,
+            "brier_score": 0.1701277196407318,
+            "confusion_matrix": {
+                "true_negative": 51693,
+                "false_positive": 4845,
+                "false_negative": 2952,
+                "true_positive": 2013
+            },
+            "positive_predictions": 6858,
+            "negative_predictions": 54645
+        },
+        "catboost": {
+            "threshold": 0.67,
+            "roc_auc": 0.7891380987796105,
+            "pr_auc": 0.28783269666333416,
+            "accuracy": 0.8702827504349381,
+            "precision": 0.2898004743965397,
+            "recall": 0.41832829808660627,
+            "f1_score": 0.3424002637652489,
+            "brier_score": 0.16388338278460796,
+            "confusion_matrix": {
+                "true_negative": 51448,
+                "false_positive": 5090,
+                "false_negative": 2888,
+                "true_positive": 2077
+            },
+            "positive_predictions": 7167,
+            "negative_predictions": 54336
+        }
+    },
+    "raw_ensemble": {
+        "threshold": 0.69,
+        "roc_auc": 0.7911939414452229,
+        "pr_auc": 0.29071887503329247,
+        "accuracy": 0.8792416630083085,
+        "precision": 0.30559065066329755,
+        "recall": 0.38972809667673713,
+        "f1_score": 0.34256882358148183,
+        "brier_score": 0.16495539296818562,
+        "confusion_matrix": {
+            "true_negative": 52141,
+            "false_positive": 4397,
+            "false_negative": 3030,
+            "true_positive": 1935
+        },
+        "positive_predictions": 6332,
+        "negative_predictions": 55171
+    },
+    "calibrated_ensemble": {
+        "threshold": 0.18,
+        "roc_auc": 0.7925818965451215,
+        "pr_auc": 0.2843160277416624,
+        "accuracy": 0.8782173227322244,
+        "precision": 0.30411171450737007,
+        "recall": 0.3947633434038268,
+        "f1_score": 0.34355828220858897,
+        "brier_score": 0.06526903437795423,
+        "confusion_matrix": {
+            "true_negative": 52053,
+            "false_positive": 4485,
+            "false_negative": 3005,
+            "true_positive": 1960
+        },
+        "positive_predictions": 6445,
+        "negative_predictions": 55058
+    }
+}

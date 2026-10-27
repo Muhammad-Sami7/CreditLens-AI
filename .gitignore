@@ -1,23 +1,50 @@
-# Virtual Environment
-.venv/
+# ---------- Secrets (never commit) ----------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.streamlit/secrets.toml
+frontend/.streamlit/secrets.toml
 
-# Python
+# ---------- Python ----------
+.venv/
+venv/
+env/
 __pycache__/
 *.py[cod]
-
-# Jupyter
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
 .ipynb_checkpoints/
 
-# Environment Variables
-.env
+# ---------- Not part of this repository ----------
+data/
+notebooks/
+docker/
+reports/
 
-# Models
-models/*.pkl
-models/*.joblib
+# ---------- Generated files and logs ----------
+*.log
+logs/
+test.db
+*.sqlite3
+catboost_info/
+mlruns/
+lightning_logs/
+*.zip
 
-# Processed Data
-data/processed/
-
-# IDE
+# ---------- Editors and OS ----------
 .vscode/
 .idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- Large model files ----------
+# The trained models in models/ ARE committed so the app can run.
+# GitHub rejects files over 100 MB. If `git push` complains about size,
+# uncomment the next line and publish the .pkl files as a GitHub Release.
+# models/*.pkl
+
+structure.txt
