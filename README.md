@@ -14,7 +14,7 @@ dataset. **This is a portfolio prototype, not a lending product.**
 
 <!-- Add your screenshots to docs/images/ with these exact names. -->
 <p align="center">
-  <img src="docs/images/screenshot_risk_assessment.png" alt="Risk assessment result with SHAP evidence and AI explanation" width="900">
+  <img src="docs/images/demo.gif" alt="Risk assessment demo: customer lookup, decision, SHAP evidence and AI explanation" width="900">
 </p>
 
 <p align="center">
