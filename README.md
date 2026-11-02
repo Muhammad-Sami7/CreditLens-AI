@@ -17,10 +17,12 @@ dataset. **This is a portfolio prototype, not a lending product.**
   <img src="docs/images/demo.gif" alt="Risk assessment demo: customer lookup, decision, SHAP evidence and AI explanation" width="900">
 </p>
 
-<p align="center">
-  <img src="docs/images/screenshot_dashboard.png" alt="Dashboard" width="440">
-  <img src="docs/images/screenshot_report_pdf.jpeg" alt="PDF report" width="440">
-</p>
+<table align="center">
+  <tr>
+    <td align="center"><img src="docs/images/screenshot_dashboard.png" alt="Dashboard" width="430"><br><sub>Dashboard</sub></td>
+    <td align="center"><img src="docs/images/screenshot_report_pdf.jpeg" alt="PDF report" width="430"><br><sub>Downloadable PDF report</sub></td>
+  </tr>
+</table>
 
 ## What it does
 
