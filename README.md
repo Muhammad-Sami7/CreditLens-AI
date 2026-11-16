@@ -213,10 +213,6 @@ scripts/            environment checks, tests and audits
 docs/               architecture, API, model card, images
 ```
 
-Training notebooks and the dataset are not part of this repository. The model
-comparison can be reproduced from the saved models with
-`scripts/compare_models_colab.py`.
-
 ## Run it locally (Windows PowerShell)
 
 Requirements: Python, PostgreSQL, a Gemini API key, the model files in `models/`,
@@ -265,8 +261,6 @@ python scripts\check_threshold.py                 # read-only audit of the 0.18 
 python scripts\evaluate_gender_impact.py          # effect of the gender input, by group
 ```
 
-`scripts/compare_models_colab.py` reproduces the model-comparison tables and plots
-from the saved models (run it in Colab with the project on Google Drive).
 
 ## Limitations
 
@@ -276,11 +270,8 @@ from the saved models (run it in Colab with the project on Google Drive).
   seven models are within noise of each other; see the comparison above.
 - **Development validation only.** There is no untouched final test set (see the
   evaluation note above).
-- **Gender is a model input** because the dataset contains it and the model was
-  trained with it. Neutralising it changes ROC-AUC only from
-  0.857 to 0.853 (in-sample, 40,000 customers), but it changes who is flagged
-  (men 15.5% with it, 11.6% without). Many jurisdictions restrict
-  its use in credit decisions; the next retrain should drop it. See
+- **Gender is a model input** (it comes with the dataset); it adds almost no
+  accuracy and should be dropped in any production version. Details in
   [docs/MODEL_CARD.md](docs/MODEL_CARD.md).
 - **The strongest signals are anonymised external credit scores** that a real
   lender would have to replace with its own.
@@ -292,11 +283,7 @@ from the saved models (run it in Colab with the project on Google Drive).
 
 ## Roadmap
 
-- Retrain without the gender input and re-evaluate on a held-out test set
-- Better features from the bureau and instalment tables (the model, not tuning, is the limit)
-- Docker / docker-compose
-- Batch upload of applicants
-- Automated pytest suite
+- Evaluate on an untouched held-out test set
 
 ## License
 
@@ -304,5 +291,6 @@ See [LICENSE](LICENSE).
 
 ## Author
 
-**Muhammad Sami** . BS Data Science
-[LinkedIn](https://www.linkedin.com/in/muhammad-sami-4b5008298 ) · [GitHub](https://github.com/Muhammad-Sami7  )
+**Muhammad Sami** · BS Data Science
+
+[LinkedIn](https://www.linkedin.com/in/muhammad-sami-4b5008298) · [GitHub](https://github.com/Muhammad-Sami7)
