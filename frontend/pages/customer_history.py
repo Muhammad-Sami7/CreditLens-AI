@@ -62,6 +62,25 @@ def _render_item(record: dict[str, Any]) -> None:
         """
     )
 
+    version = record.get("model_version")
+    completeness = record.get("feature_completeness")
+    explanation = record.get("explanation_text")
+
+    if version or completeness is not None or explanation:
+        with st.expander(
+            f"Audit details - assessment #{record['prediction_id']}"
+        ):
+            if version:
+                st.markdown(f"**Model version:** {version}")
+            if completeness is not None:
+                st.markdown(
+                    f"**Input completeness:** "
+                    f"{completeness * 100:.0f}% of features"
+                )
+            if explanation:
+                st.markdown("**Explanation recorded at the time:**")
+                st.write(explanation)
+
 
 def render_customer_history() -> None:
 

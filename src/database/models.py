@@ -129,6 +129,33 @@ class Prediction(Base):
         nullable=False,
     )
 
+    # ---- Audit-log fields (nullable: older rows predate them) ----
+
+    model_version: Mapped[str | None] = mapped_column(
+        String(100),
+        nullable=True,
+    )
+
+    model_weights: Mapped[dict[str, Any] | None] = mapped_column(
+        JSONB,
+        nullable=True,
+    )
+
+    explanation_text: Mapped[str | None] = mapped_column(
+        Text,
+        nullable=True,
+    )
+
+    feature_completeness: Mapped[float | None] = mapped_column(
+        Float,
+        nullable=True,
+    )
+
+    shap_base_value: Mapped[float | None] = mapped_column(
+        Float,
+        nullable=True,
+    )
+
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         server_default=func.now(),

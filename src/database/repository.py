@@ -68,6 +68,11 @@ async def create_prediction(
     probability: float,
     ensemble_probability: float,
     threshold: float,
+    model_version: str | None = None,
+    model_weights: dict[str, Any] | None = None,
+    explanation_text: str | None = None,
+    feature_completeness: float | None = None,
+    shap_base_value: float | None = None,
 ) -> Prediction:
 
     prediction_record = Prediction(
@@ -78,6 +83,11 @@ async def create_prediction(
         probability=probability,
         ensemble_probability=ensemble_probability,
         threshold=threshold,
+        model_version=model_version,
+        model_weights=model_weights,
+        explanation_text=explanation_text,
+        feature_completeness=feature_completeness,
+        shap_base_value=shap_base_value,
     )
 
     session.add(prediction_record)

@@ -12,11 +12,13 @@ Author: Muhammad Sami
 """
 from __future__ import annotations
 
+import json
 from typing import Any
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.business.risk_engine import RiskEngine
+from src.config.paths import ENSEMBLE_CONFIG_PATH
 from src.database.repository import (
     create_model_prediction,
     create_prediction,
@@ -96,6 +98,21 @@ class PredictionService:
             threshold=self.predictor.ensemble.threshold
         )
 
+        # Recorded with every assessment so a past decision can be
+        # traced to the model configuration that produced it.
+        _config = json.loads(
+            ENSEMBLE_CONFIG_PATH.read_text()
+        )
+
+        self.model_version = (
+            f"{_config.get('project_name', 'CreditLens-AI')} "
+            f"v{_config.get('version', '?')}"
+        )
+
+        self.model_weights = dict(
+            _config["ensemble"]["weights"]
+        )
+
         logger.info(
             "Prediction service initialized."
         )
@@ -111,6 +128,7 @@ class PredictionService:
         customer_id: str | int | float,
         features: dict[str, Any],
         top_n: int = 10,
+        feature_completeness: float | None = None,
     ) -> dict[str, Any]:
         """
         Generate, explain, and persist a complete
@@ -327,6 +345,16 @@ class PredictionService:
             probability=probability,
             ensemble_probability=ensemble_probability,
             threshold=assessment.threshold,
+            model_version=self.model_version,
+            model_weights=self.model_weights,
+            explanation_text=(
+                f"{llm_explanation.summary}\n\n"
+                f"{llm_explanation.risk_explanation}"
+            ),
+            feature_completeness=feature_completeness,
+            shap_base_value=float(
+                shap_result["base_value"]
+            ),
         )
 
         # ----------------------------------------------------

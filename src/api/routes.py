@@ -205,14 +205,29 @@ async def _run_prediction(
 
     try:
 
+        comp = (
+            completeness
+            if completeness is not None
+            else _build_feature_completeness(features)
+        )
+
+        ratio = None
+        if comp is not None and comp.expected_count:
+            ratio = (
+                comp.expected_count
+                - comp.missing_count
+                - comp.null_count
+            ) / comp.expected_count
+
         result = await prediction_service.predict(
             session,
             customer_id=customer_id,
             features=_normalise_missing_values(features),
             top_n=10,
+            feature_completeness=ratio,
         )
 
-        return _build_response(result, features, completeness)
+        return _build_response(result, features, comp)
 
     except ValueError as exc:
 
@@ -401,6 +416,9 @@ async def get_customer_prediction_history(
                 ensemble_probability=record.ensemble_probability,
                 threshold=record.threshold,
                 created_at=record.created_at,
+                model_version=record.model_version,
+                feature_completeness=record.feature_completeness,
+                explanation_text=record.explanation_text,
             )
             for record in records
         ],

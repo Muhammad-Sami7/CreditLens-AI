@@ -227,6 +227,14 @@ class PredictionHistoryItem(BaseModel):
 
     created_at: datetime
 
+    # Audit-log fields; null for assessments saved before they existed.
+
+    model_version: str | None = None
+
+    feature_completeness: float | None = None
+
+    explanation_text: str | None = None
+
 
 class CustomerPredictionHistoryResponse(BaseModel):
     """
