@@ -14,7 +14,10 @@
    - `RiskEngine` compares the calibrated probability with the production threshold
    - SHAP explains the prediction
    - the Gemini service writes the narrative from that evidence
-   - the result is saved to PostgreSQL
+   - the result is saved to PostgreSQL in one transaction: the assessment (decision,
+     calibrated and raw probability, threshold, model version, ensemble weights, input
+     completeness, SHAP base value, explanation text), the three model scores and the
+     top SHAP risk factors
 6. The response returns to Streamlit, which renders it.
 
 ## Components
@@ -27,7 +30,7 @@
 | `src/explainability/shap_explainer.py` | SHAP for LightGBM, XGBoost and CatBoost, combined with the ensemble weights |
 | `src/business/risk_engine.py` | Threshold, risk level, decision |
 | `src/services/llm_explanation_service.py` | Gemini explanation, checked against the SHAP evidence |
-| `src/database/` | SQLAlchemy models, repository, connection |
+| `src/database/` | SQLAlchemy models, repository, connection (assessment audit log) |
 | `frontend/` | Streamlit UI (display only) |
 
 ## Design decisions
@@ -37,4 +40,5 @@
 - **Startup.** The service and models load when the API starts, so the API is slow to become ready; the frontend shows a clear "unavailable" message until it is.
 - **Graceful degradation.** The frontend reads `/openapi.json` and only offers features the connected backend provides.
 - **Explanation is optional.** If the Gemini service fails, the prediction, decision and SHAP evidence are still returned and saved; only the written summary is replaced by a notice.
+- **PostgreSQL is an audit log, not part of the model.** Predictions do not depend on it. Each assessment is stored with the model version, ensemble weights, threshold, input completeness and the explanation shown, so a past decision can be reviewed and traced to the configuration that produced it. If the record cannot be saved, the API returns an error rather than an unrecorded decision.
 - **Secrets** are read from environment variables (`.env`), never stored in code.
