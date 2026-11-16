@@ -304,6 +304,5 @@ See [LICENSE](LICENSE).
 
 ## Author
 
-**Muhammad Sami**
-BS Data Science
+**Muhammad Sami** . BS Data Science
 [LinkedIn](https://www.linkedin.com/in/muhammad-sami-4b5008298 ) · [GitHub](https://github.com/Muhammad-Sami7  )
